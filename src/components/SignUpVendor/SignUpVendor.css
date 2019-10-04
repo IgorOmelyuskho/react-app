@@ -1,0 +1,16 @@
+/*
+ * SignUpVendor css File
+*/
+
+.SignUpVendor { 
+    /* propertys here */
+}
+
+.errors {
+  color: red;
+}
+
+.error11 {
+  font-size: 30px;
+  color: red;
+}

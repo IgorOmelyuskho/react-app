@@ -1,0 +1,9 @@
+.fixed {
+  position: fixed;
+  bottom: 10px;
+  opacity: 0;
+}
+
+.fixed button {
+  margin: 5px;
+}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './SignUpInvestor.css';
 import MaskedInput from 'react-text-mask'
-import * as AuthService from '../../services/AuthService';
+import AuthService from '../../services/AuthService';
 
 const phoneMask = ['+', /\d/, /\d/, /\d/, ' ', /\d/, /\d/, ' ', /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/];
 const phonePattern = '\\\+\\d\{3\}\\s\\d\{2\}\\s\\d\{3\}\\s\\d\{4\}';
@@ -9,7 +9,6 @@ const emailPattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".
 
 class SignUpInvestor extends Component {
   constructor(props) {
-    console.log();
     super(props);
     this.state = {
       fullName: "",
@@ -37,7 +36,7 @@ class SignUpInvestor extends Component {
 
         <div className="row">
           <div className="col-6 offset-3">
-            <div>SignUpInvestor</div>
+            <div className="role">SignUp as Investor</div>
             <div className={this.validator.allValid() === true ? 'text-success' : 'text-danger'}>Form is valid: {this.validator.allValid().toString()}, does not work correctly</div>
             <form>
               <div className="mb-3 form-group">

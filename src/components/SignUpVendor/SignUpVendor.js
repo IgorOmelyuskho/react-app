@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './SignUpVendor.css';
 import MaskedInput from 'react-text-mask'
-import * as AuthService from '../../services/AuthService';
+import AuthService from '../../services/AuthService';
 import * as NotificationService from '../../services/NotificationService';
 
 const phoneMask = ['+', /\d/, /\d/, /\d/, ' ', /\d/, /\d/, ' ', /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/];
@@ -51,11 +51,11 @@ class SignUpVendor extends Component {
 
         <div className="row">
           <div className="col-6 offset-3">
-            <div>SignUpVendor</div>
+            <div className="role">SignUp as Vendor</div>
             <div className={this.state.formValid === true ? 'text-success' : 'text-danger'}>Form is valid: {this.state.formValid.toString()}</div>
             <form>
               <div className="mb-3 form-group">
-                <div>fullName</div>
+                <div>FullName</div>
                 <input className={'form-control ' + (fullName ? 'is-invalid' : '')} value={this.state.fullName} onChange={this.handleUserInput} type="text" name="fullName" />
                 {fullName && <div className="invalid-feedback">
                   <div>{this.state.fullNameError}</div>
@@ -164,8 +164,8 @@ class SignUpVendor extends Component {
       case 'password':
         if (value === "") {
           passwordError = 'Password is required';
-        } else if (value.length < 8) {
-          passwordError = 'Min length is 8';
+        } else if (value.length < 6) {
+          passwordError = 'Min length is 6';
         } else {
           passwordError = '';
         }
@@ -220,12 +220,14 @@ class SignUpVendor extends Component {
     }
 
     AuthService.signUpAsVendor(this.state)
-      .then(function (response) {
-        if (response.data == null || response.data.token == null)
-          NotificationService.notify('Check you email');
-      })
-      .catch(function (error) {
-        console.warn(error);
+      .then((response) => {
+          if (response.data == null || response.data.token == null) {
+            NotificationService.notify('Check you email');
+          }
+        }
+      )
+      .catch((error) => {
+        NotificationService.notify(error.response.data.error.errorMessage[0]);
       });
   }
 

@@ -33,7 +33,7 @@ class SignUp extends Component {
       <div>
         <div className="text-center">
           <button onClick={this.asVendor} className="btn btn-primary select-role">Sign up as Vendor</button>
-          <button onClick={this.asInvestor} className="btn btn-primary select-role">Sign up as Investor</button>
+          <button /* disabled */ onClick={this.asInvestor} className="btn btn-primary select-role">Sign up as Investor</button>
         </div >
 
         {signUpComponent}

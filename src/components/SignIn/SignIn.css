@@ -5,3 +5,7 @@
 .SignIn {
     /* propertys here */
 }
+
+.error {
+    color: red;
+}

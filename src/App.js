@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route, Link, withRouter, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Link, withRouter, Switch } from "react-router-dom";
 import EmailValidate from './components/EmailValidate/index';
 import 'bootstrap/dist/css/bootstrap.css';
 import ReactNotification from 'react-notifications-component';
@@ -11,27 +11,50 @@ import Header from './components/Header/index';
 import Index from './components/Index/index';
 import SignIn from './components/SignIn/index';
 import SignUp from './components/SignUp//index';
-import Home from './components/Home/index';
+import Vendor from './components/VendorComponents/Vendor/index';
+import ForProgramRouting from './services/ForProgramRouting/ForProgramRouting';
+import SharedHeader from './components/SharedHeader/index';
 
+import AuthService from './services/AuthService';
+import { useInterceptor } from './services/AddTokenInterceptor';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    useInterceptor();
+    AuthService.init();
+  }
+
   render() {
+    const TestRouter = () => (
+      <h1>TestRouter</h1>
+    )
+
+    const TestRouter_2 = () => (
+      <h1>TestRouter_2</h1>
+    )
+
     return (
       <div className="App">
         <ReactNotification />
-        <Router>
+        <BrowserRouter>
           <div>
-            <Header />
+            <ForProgramRouting />
+            <SharedHeader />
             <Switch>
               <Route exact path="/" component={Index} />
-              <Route path="/signin" component={SignIn} />
+              {/* <Route path="/signin" component={SignIn} /> */}
+              <Route path="/signin" render={matchProps => <SignIn {...matchProps} />} />
               <Route path="/signup" component={SignUp} />
-              <Route path="/home" component={Home} />
+              <Route path="/test_router" component={TestRouter} />
+              <Route path="/test_router_2" component={TestRouter_2} />
+              <Route path="/signup" component={SignUp} />
               <Route path="/email-validate/:code" component={EmailValidate} />
-              {/* <Route component={NoMatch} /> redirect*/}
+              <Route path="/vendor" component={Vendor} />
+              <Route component={Index} /> {/* redirect */}
             </Switch>
           </div>
-        </Router>
+        </BrowserRouter>
       </div>
     );
   }

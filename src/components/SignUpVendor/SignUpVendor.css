@@ -3,7 +3,7 @@
 */
 
 .SignUpVendor { 
-    /* propertys here */
+    font-weight: normal;
 }
 
 .errors {
@@ -13,4 +13,8 @@
 .error11 {
   font-size: 30px;
   color: red;
+}
+
+.role {
+  font-size: 20px;
 }

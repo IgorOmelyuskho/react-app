@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './EmailValidate.css';
-import * as AuthService from '../../services/AuthService';
+import AuthService from '../../services/AuthService';
 
 class EmailValidate extends Component {
   constructor(props) {

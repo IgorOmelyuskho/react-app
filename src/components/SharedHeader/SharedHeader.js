@@ -7,6 +7,7 @@ class SharedHeader extends Component {
   render() {
     return <div>
       {/* <div>{AuthService.user}</div> */}
+      <div>text</div>
       <Header history={history} />
     </div>;
   }

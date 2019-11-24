@@ -97,7 +97,7 @@ class VendorNewProject extends Component {
       return;
     }
 
-    this.setState({showAvataraProgress: true});
+    this.setState({ showAvataraProgress: true });
 
     FilesService.uploadFiles(this.avataraFormData)
       .then(
@@ -106,12 +106,12 @@ class VendorNewProject extends Component {
           this.avataraData = res[0];
           // this.vendorProjectForm.controls['avatara'].setErrors(null);
           this.avataraFormData.delete('AVATAR');
-          this.setState({showAvataraProgress: false});
+          this.setState({ showAvataraProgress: false });
         },
         err => {
           console.warn(err);
           this.avataraFormData.delete('AVATAR');
-          this.setState({showAvataraProgress: false});
+          this.setState({ showAvataraProgress: false });
         }
       )
   }

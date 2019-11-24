@@ -1,0 +1,4 @@
+.for-scroll {
+  display: flex;
+  flex-wrap: wrap;
+}

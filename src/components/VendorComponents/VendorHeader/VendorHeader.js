@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './VendorHeader.css';
 import { Route, Link, withRouter, Redirect, Switch } from "react-router-dom";
 
 class VendorHeader extends Component {

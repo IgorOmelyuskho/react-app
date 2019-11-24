@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Link, withRouter, Switch, Redirect } from "react-
 import VendorMain from '../VendorMain/index';
 import ViewProjects from '../ViewProjects/index';
 import VendorProjects from '../VendorProjects/index';
+import VendorNewProject from '../VendorNewProject/index';
 
 class Vendor extends Component {
   constructor(props) {
@@ -18,6 +19,7 @@ class Vendor extends Component {
           <Route path="/vendor/view-projects" component={ViewProjects} />
           <Route path="/vendor/projects" component={VendorProjects} />
           <Route path="/vendor/main" component={VendorMain} />
+          <Route path="/vendor/new-project" component={VendorNewProject} />
           <Route component={VendorMain} />
         </Switch>
       </div>

@@ -1,7 +1,7 @@
-import { environment } from '../environment';
 import { UserRole } from '../models/userRole';
 import * as profileService from './ProfileService';
 import axios from 'axios';
+import { environment } from '../environment';
 import history from './HistoryModule';
 import Navigate from './ForProgramRouting/ServiceProgramRouting';
 const jwtDecode = require('jwt-decode');

@@ -1,0 +1,172 @@
+@import '../../../../styles-variables.scss';
+
+.project {
+  display: flex;
+  height: 176px;
+  width: 576px;
+  background: white;
+  overflow: hidden;
+  cursor: pointer;
+
+  h5 {
+    font-size: 15px;
+    font-weight: bold;
+    line-height: 1.07;
+    letter-spacing: 0.5px;
+    color: rgba(0, 0, 0, 0.8);
+  }
+
+  .avatara-wrapper {
+    min-width: 176px;
+    margin-right: 20px;
+    position: relative;
+
+    .avatara {
+      width: 100%;
+      height: 100%;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+    }
+
+    .rating {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 60px;
+      height: 50px;
+      border-top-left-radius: 6px;
+      background: $green;
+      line-height: 47px;
+      text-align: center;
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      font-style: normal;
+      font-stretch: normal;
+    }
+  }
+
+  .short-project-info {
+    width: 100%;
+    padding-right: 10px;
+
+    .name-and-region {
+      margin-top: 11px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    hr {
+      border-top: 1px solid rgba(36, 21, 21, 0.2);
+      margin: 0;
+      margin-top: 3px;
+    }
+
+    .bottom-info {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+
+      .remove-btn {
+        width: 25px;
+
+        &:hover {
+          transform: scale(1.2);
+        }
+      }
+
+      img.flame {
+        height: 21px;
+        margin-left: 15px;
+      }
+
+      img.right-img {
+        height: 16px;
+        margin-left: 15px;
+      }
+
+      .project-name {
+        color: $green;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-bottom: 0px;
+      }
+    }
+
+    .money-and-sphere {
+      display: flex;
+      justify-content: space-between;
+
+      h5 {
+        margin: 0;
+        line-height: 1.8;
+      }
+
+      .field-activity {
+        display: flex;
+        font-size: 15px;
+        letter-spacing: 0.5px;
+
+        img {
+          position: relative;
+          top: 6px;
+          margin-right: 10px;
+          height: 12px;
+        }
+
+        .field-activity-text {
+
+          span {
+            color: $green;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+
+    .filtered-project-steps {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 5px 0px 5px 0px;
+      position: relative;
+      height: 80px;
+    }
+  }
+
+  .company-name {
+    font-size: 12px;
+    line-height: 2.1;
+    letter-spacing: 0.4px;
+  }
+
+  .region {
+    letter-spacing: 0.5px;
+  }
+
+  .fa-map-marker {
+    color: $green;
+  }
+}
+
+:host ::ng-deep .filtered-project-steps .step {
+  border-radius: 6px;
+  border: solid 1px #75af27;
+  color: #75af27;
+  font-size: 12px;
+  margin: 5px 5px 5px 0px;
+  padding: 0px 9px;
+  line-height: 2;
+  height: 27px;
+  text-overflow: ellipsis;
+  max-width: 310px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+:host ::ng-deep .highlighted {
+  background: #ff855e;
+  color: #673ab7;
+  border-radius: 3px;
+}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './SignIn.css';
+import './SignIn.scss';
 import AuthService from '../../services/AuthService';
 import * as NotificationService from '../../services/NotificationService';
 

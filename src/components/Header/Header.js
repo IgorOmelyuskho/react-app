@@ -49,7 +49,7 @@ class Header extends Component {
     return (
       <nav className="navbar navbar-dark bg-dark">
         <Link to="/">
-          <span className="navbar-brand mb-0 h1">Navbar</span>
+          <span className="navbar-brand mb-0 h1">IIUA</span>
         </Link>
         <div className='navbar-text'>Navbar for signin, signup and index</div>
         <span className='d-flex'>

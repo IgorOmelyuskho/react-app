@@ -57,49 +57,37 @@ class SignUpVendor extends Component {
               <div className="mb-3 form-group">
                 <div>FullName</div>
                 <input className={'form-control ' + (fullName ? 'is-invalid' : '')} value={this.state.fullName} onChange={this.handleUserInput} type="text" name="fullName" />
-                {fullName && <div className="invalid-feedback">
-                  <div>{this.state.fullNameError}</div>
-                </div>}
+                {fullName && <div className="invalid-feedback">{this.state.fullNameError}</div>}
               </div>
 
               {/* <div className="mb-3 form-group">   
                 <div>ITN</div>
                 <input className={'form-control ' + (itn ? 'is-invalid' : '')} value={this.state.itn} onChange={this.handleUserInput} type="text" name="itn" />
-                {itn && <div className="invalid-feedback">
-                  <div>{this.state.itnError}</div>
-                </div>}
+                {itn && <div className="invalid-feedback">{this.state.itnError}</div>}
               </div> */}
 
-              {/* <div className="mb-3 form-group">
+              {/*    <div className="mb-3 form-group">
                 <div>Phone</div>
                 <MaskedInput className={'form-control ' + (phone ? 'is-invalid' : '')} mask={phoneMask} value={this.state.phone} onChange={this.handleUserInput} type="text" name="phone" />
-                {phone && <div className="invalid-feedback">
-                  <div>{this.state.phoneError}</div>
-                </div>}
+                {phone && <div className="invalid-feedback">{this.state.phoneError}</div>}
               </div> */}
 
               <div className="mb-3 form-group">
                 <div>Email</div>
                 <input className={'form-control ' + (email ? 'is-invalid' : '')} value={this.state.email} onChange={this.handleUserInput} type="email" name="email" />
-                {email && <div className="invalid-feedback">
-                  <div>{this.state.emailError}</div>
-                </div>}
+                {email && <div className="invalid-feedback">{this.state.emailError}</div>}
               </div>
 
               <div className="mb-3 form-group">
                 <div>Password</div>
                 <input className={'form-control ' + (password ? 'is-invalid' : '')} value={this.state.password} onChange={this.handleUserInput} type="password" name="password" />
-                {password && <div className="invalid-feedback">
-                  <div>{this.state.passwordError}</div>
-                </div>}
+                {password && <div className="invalid-feedback">{this.state.passwordError}</div>}
               </div>
 
               <div className="mb-3 form-group">
                 <div>Repeat password</div>
                 <input className={'form-control ' + (rePassword ? 'is-invalid' : '')} value={this.state.rePassword} onChange={this.handleUserInput} type="password" name="rePassword" />
-                {rePassword && <div className="invalid-feedback">
-                  <div>{this.state.rePasswordError}</div>
-                </div>}
+                {rePassword && <div className="invalid-feedback">{this.state.rePasswordError}</div>}
               </div>
 
               <button className="btn btn-success" type="button" onClick={this.signUp}>Sign up</button>
@@ -221,10 +209,10 @@ class SignUpVendor extends Component {
 
     AuthService.signUpAsVendor(this.state)
       .then((response) => {
-          if (response.data == null || response.data.token == null) {
-            NotificationService.notify('Check you email');
-          }
+        if (response.data == null || response.data.token == null) {
+          NotificationService.notify('Check you email');
         }
+      }
       )
       .catch((error) => {
         NotificationService.notify(error.response.data.error.errorMessage[0]);

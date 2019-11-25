@@ -138,7 +138,7 @@ export default class AuthService {
             if (pathName === '' || pathName === '/') {
               Navigate.navigateByUrl('vendor'); /* history.push('vendor') - not work */
             } else {
-              Navigate.navigateByUrl('vendor'); /* history.push('vendor') - not work */
+              Navigate.navigateByUrl(pathName); /* history.push(pathName) - not work */
             }
           },
           err => {

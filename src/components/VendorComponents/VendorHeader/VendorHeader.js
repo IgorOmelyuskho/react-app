@@ -1,9 +1,22 @@
 import React, { Component } from 'react';
 import './VendorHeader.css';
 import { Route, Link, withRouter, Redirect, Switch } from "react-router-dom";
+import AuthService from '../../../services/AuthService';
 
 class VendorHeader extends Component {
   render() {
+    const SignOutButton = () => (  /* 2 way */
+      <Route render={({ history }) => (
+        <button
+          className="btn btn-primary"
+          type='button'
+          onClick={() => { AuthService.signOut() }}
+        >
+          SignOut
+        </button>
+      )} />
+    )
+
     return <nav className="navbar navbar-dark bg-dark">
       <Link to="/">
         <span className="navbar-brand mb-0 h1">IIUA</span>
@@ -22,6 +35,7 @@ class VendorHeader extends Component {
           My Projects
         <span className="sr-only">(current)</span>
         </Link>
+        <SignOutButton />
       </span>
     </nav>
   }

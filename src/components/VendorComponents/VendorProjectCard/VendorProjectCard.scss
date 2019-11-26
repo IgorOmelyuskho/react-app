@@ -1,0 +1,12 @@
+.project {
+  width: 250px;
+  border: 2px solid green;
+  margin: 10px;
+  cursor: pointer;
+
+  .avatara {
+    height: 100px;
+    width: 100px;
+    background-size: cover;
+  }
+}

@@ -19,4 +19,26 @@ export default class ProjectsService {
 
     return res.data;
   }
+
+  static createProject(projectData) {
+    return axios.post(environment.projects + environment.vendorProject, projectData);
+  }
+
+  static async getProjectById(projectId) { /* not work on back-end */
+    const response = await axios.get(environment.projects + environment.getProjectById + '/' + projectId);
+
+    if (response.data.avatara == null) {
+      response.avatara = {
+        id: 1,
+        url: window.location.origin + '/assets/img/Network-Profile.png',
+        originalName: 'Network-Profile.png'
+      }
+    }
+
+    return response;
+  }
+
+  static updateVendorProject(projectId, updatedVendorProject) {
+    return axios.put(environment.projects + environment.vendorProject + projectId, updatedVendorProject);
+  }
 }

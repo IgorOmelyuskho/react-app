@@ -1,0 +1,60 @@
+.VendorNewProjectStyle {
+  font-weight: normal;
+
+  input {
+    margin: 5px;
+    margin-bottom: 0;
+  }
+
+  .avatara {
+    height: 150px;
+    background-size: cover;
+  }
+
+  .description {
+    width: 400px;
+    height: 100px;
+  }
+
+  .error {
+    color: red;
+  }
+
+  .videos {
+    .video {
+      display: flex;
+      justify-content: center;
+
+      .text {
+        line-height: 1em;
+        margin-right: 5px;
+      }
+
+      img {
+        height: 1em;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .photos {
+    .photo {
+      position: relative;
+      margin: auto;
+      margin-bottom: 5px;
+      width: min-content;
+
+      .picture {
+        height: 50px;
+      }
+
+      .remove {
+        height: 20px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        cursor: pointer;
+      }
+    }
+  }
+}

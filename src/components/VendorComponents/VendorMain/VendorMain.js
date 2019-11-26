@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './VendorMain.css';
+import './VendorMain.scss';
 
 class VendorMain extends Component {
   constructor(props) {

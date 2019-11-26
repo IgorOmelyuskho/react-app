@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import FileUploader from '../../../components/FileUploader/index';
-import './VendorNewProject.scss';
+import  './UpdateVendorProject.scss'; 
+import ProjectsService from '../../../services/ProjectsService';
 import { regions } from '../../../assets/regions';
 import FilesService from '../../../services/FileService';
-import ProjectsService from '../../../services/ProjectsService';
+import FileUploader from '../../../components/FileUploader/index';
 
-class VendorNewProject extends Component {
+class UpdateVendorProject extends Component {
   avataraImg;
   avataraData;
   avataraFormData = new FormData();
@@ -20,7 +20,7 @@ class VendorNewProject extends Component {
     this.state = {
       showAvataraProgress: false,
       formValid: false,
-      submitted: false,
+      isLoaded: false,
 
       projectName: "",
       companyName: "",
@@ -30,64 +30,80 @@ class VendorNewProject extends Component {
       videos: [],
       images: [],
 
-      avataraError: 'Avatara is required',
-      projectNameError: 'Project name is required',
-      companyNameError: 'Company name is required',
-      regionError: 'Region is required',
-      addressError: 'Address is required',
-      descriptionError: 'Description is required',
-      videosError: 'Link to video is required',
-      imagesError: 'Images is required'
+      avataraError: '',
+      projectNameError: '',
+      companyNameError: '',
+      regionError: '',
+      addressError: '',
+      descriptionError: '',
+      videosError: '',
+      imagesError: ''
     };
   }
 
   componentDidMount() {
-    // console.log(styles);
-  }
-
-  componentWillUnmount() {
-    // clearInterval(this.timer);
+    const splitArr = this.props.history.location.pathname.split('/');
+    const projectId = splitArr[splitArr.length - 1];
+    ProjectsService.fetchVendorProjects()
+    .then(projects => {
+      for (let i = 0; i < projects.length; i++) {
+        if (projects[i].id.toString() === projectId) {
+          const project = projects[i];
+          this.setState({
+            isLoaded: true,
+            projectName: project.name,
+            companyName: project.legalEntityName,
+            region: project.region,
+            address: project.address,
+            description: project.description,
+            videos: project.videos,
+            images: project.images,
+          }, this.setFormValid)
+          this.avataraImg.current.src = project.avatara.url;
+          return;
+        }
+      }
+    })
   }
 
   render() {
-    const showAvataraErr = this.state.avataraError !== '' && this.state.submitted;
-    const showProjectNameErr = this.state.projectNameError !== '' && this.state.submitted;
-    const showCompanyNameErr = this.state.companyNameError !== '' && this.state.submitted;
-    const showRegionErr = this.state.regionError !== '' && this.state.submitted;
-    const showAddressErr = this.state.addressNameError !== '' && this.state.submitted;
-    const showDescriptionErr = this.state.descriptionError !== '' && this.state.submitted;
-    const showVideosErr = this.state.videosError !== '' && this.state.submitted;
-    const showImagesErr = this.state.imagesError !== '' && this.state.submitted;
+    const showAvataraErr = this.state.avataraError !== '';
+    const showProjectNameErr = this.state.projectNameError !== '';
+    const showCompanyNameErr = this.state.companyNameError !== '';
+    const showRegionErr = this.state.regionError !== '';
+    const showAddressErr = this.state.addressNameError !== '';
+    const showDescriptionErr = this.state.descriptionError !== '';
+    const showVideosErr = this.state.videosError !== '';
+    const showImagesErr = this.state.imagesError !== '';
 
-    return <div className="VendorNewProjectStyle">
+    return <div className="UpdateVendorProject">
       <img ref={this.avataraImg} className="avatara" src={"/images/empty-profile.jpg"} alt="empty_image" />
       {showAvataraErr && <div className="error">{this.state.avataraError}</div>}
       <input onChange={this.handleAvataraSelect} name="avatara" type="file" accept="image/*" />
 
       <hr />
 
-      <input onChange={this.handleUserInput} name="projectName" className="project-name" placeholder="Project name" type="text" />
+      <input value={this.state.projectName} onChange={this.handleUserInput} name="projectName" className="project-name" placeholder="Project name" type="text" />
       {showProjectNameErr && <div className="error">{this.state.projectNameError}</div>}
 
-      <input onChange={this.handleUserInput} name="companyName" className="company-name" placeholder="Company name" type="text" />
+      <input value={this.state.companyName} onChange={this.handleUserInput} name="companyName" className="company-name" placeholder="Company name" type="text" />
       {showCompanyNameErr && <div className="error">{this.state.companyNameError}</div>}
 
       <hr />
 
-      <select defaultValue={'DEFAULT'} onChange={this.handleUserInput} name="region" className="region">
-        <option value="DEFAULT" disabled>Not selected</option>
+      <select value={this.state.region} onChange={this.handleUserInput} name="region" className="region">
         {regions.map((data, index) => {
           return index > 0 ? <option key={index} value={data.value}>{data.text}</option> : null
         })}
       </select>
       {showRegionErr && <div className="error">{this.state.regionError}</div>}
 
-      <input onChange={this.handleUserInput} name="address" className="address" placeholder="Address" type="text" />
+      <input value={this.state.address} onChange={this.handleUserInput} name="address" className="address" placeholder="Address" type="text" />
       {showAddressErr && <div className="error">{this.state.addressError}</div>}
 
       <hr />
 
-      <textarea onChange={this.handleUserInput} name="description" className="description" placeholder="Description" cols="30" rows="10"></textarea>
+      <textarea value={this.state.description} onChange={this.handleUserInput} name="description" className="description" placeholder="Description" cols="30" rows="10"></textarea>
       {showDescriptionErr && <div className="error">{this.state.descriptionError}</div>}
 
       <hr />
@@ -120,7 +136,7 @@ class VendorNewProject extends Component {
 
       <hr />
 
-      <button disabled={!this.state.formValid && this.state.submitted} onClick={this.createProject}>Create project</button>
+      <button disabled={!this.state.formValid && this.state.submitted} onClick={this.updateProject}>Update project</button>
     </div>;
   }
 
@@ -326,7 +342,7 @@ class VendorNewProject extends Component {
       )
   }
 
-  createProject = () => {
+  updateProject = () => {
     this.setState({ submitted: true });
 
     if (this.state.formValid) {
@@ -336,13 +352,13 @@ class VendorNewProject extends Component {
         name: this.state.projectName,
         legalEntityName: this.state.companyName
       }
-      const avatara = this.avataraData;
+      const avatara = this.state.avatara;
       avatara.isAvatara = true;
       request.images.push(avatara);
 
-      ProjectsService.createProject(request);
+      ProjectsService.updateVendorProject(request);
     }
   }
 }
 
-export default VendorNewProject;
+export default UpdateVendorProject;

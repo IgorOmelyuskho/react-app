@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
-import './VendorProjects.css';
+import './VendorProjects.scss';
 import ProjectsService from '../../../services/ProjectsService';
 import VendorProjectCard from '../VendorProjectCard/index';
-import Navigate from '../../../services/ForProgramRouting/ServiceProgramRouting';
+import Navigate from '../../../services/ForProgramRouting/Navigate';
 
 class VendorProjects extends Component {
   _isMounted = false;
   constructor(props) {
     super(props);
     this.state = {
-      projects: [],
-      lastClickProject: null
+      projects: []
     }
   }
   componentDidMount() {
@@ -33,7 +32,6 @@ class VendorProjects extends Component {
 
   render() {
     return <div className="wrapper">
-      <div>last click to project with id: {this.state.lastClickProject}</div>
       <button onClick={() => Navigate.navigateByUrl('/vendor/new-project')} className="btn btn-primary mt-3">New project</button>
 
       <div className="for-scroll">
@@ -47,9 +45,7 @@ class VendorProjects extends Component {
   }
 
   onProjectClick = (project) => {
-    this.setState({
-      lastClickProject: project.id
-    })
+    Navigate.navigateByUrl('/vendor/project/' + project.id)
   }
 }
 

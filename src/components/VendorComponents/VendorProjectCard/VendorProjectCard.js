@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './VendorProjectCard.css';
+import './VendorProjectCard.scss';
 
 class VendorProjectCard extends Component {
   componentDidMount() {
@@ -7,9 +7,9 @@ class VendorProjectCard extends Component {
 
   render() {
     return (
-      <div className="project" onClick={() => { this.props.onProjectClick(this.props.project)}}>
+      <div className="project" onClick={this.projectClick}>
         <div className="avatara-wrapper">
-          <div className="avatara" style={{backgroundImage: this.getAvataraUrl(this.props.project)}}></div>
+          <div className="avatara" style={{ backgroundImage: this.getAvataraUrl(this.props.project) }}></div>
           <div className="rating">{this.props.project.rating}</div>
         </div>
         <div className="short-project-info">
@@ -35,6 +35,12 @@ class VendorProjectCard extends Component {
         </div>
       </div>
     );
+  }
+
+  projectClick = () => {
+    if (this.props.onProjectClick != null) {
+      this.props.onProjectClick(this.props.project)
+    }
   }
 
   getAvataraUrl = (project) => {

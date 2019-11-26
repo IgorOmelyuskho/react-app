@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from "react-router-dom";
 import './ForProgramRouting.css';
 import { Route } from "react-router-dom";
 
-import Navigate from './ServiceProgramRouting';
+import Navigate from './Navigate';
 
 export default class ForProgramRouting extends Component {
   render() {

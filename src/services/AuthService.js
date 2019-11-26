@@ -3,7 +3,7 @@ import * as profileService from './ProfileService';
 import axios from 'axios';
 import { environment } from '../environment';
 import history from './HistoryModule';
-import Navigate from './ForProgramRouting/ServiceProgramRouting';
+import Navigate from './ForProgramRouting/Navigate';
 const jwtDecode = require('jwt-decode');
 
 export default class AuthService {

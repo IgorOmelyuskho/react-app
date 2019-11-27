@@ -1,0 +1,166 @@
+@import '../../../variables.scss';
+
+.VendorMainRight {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 15px;
+  top: 50px;
+  z-index: 100000;
+
+  .main-screen-right {
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.16);
+    background: white;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 10000;
+    height: 100%;
+
+    .main-block {
+      margin-right: 70px;
+      display: inline-flex;
+      height: 99.5%;
+      border-right: 1px solid #d3d3d3;
+
+      .find-investor-wrapper {
+        width: 18vw;
+        height: 100%;
+      }
+
+      .messages-wrapper {
+        width: 30vw;
+        height: 100%;
+      }
+
+      .investment-offer-wrapper {
+        width: 30vw;
+        height: 100%;
+      }
+    }
+
+    @media screen and (max-width: 1250px) {
+
+      /* also used in .ts */
+      .main-block {
+        .find-investor-wrapper {
+          width: 35vw;
+        }
+
+        .messages-wrapper {
+          width: calc(65vw - 70px);
+          /* 70 - .main-block margin-right: 70px; */
+        }
+
+        .investment-offer-wrapper {
+          width: calc(100vw - 70px);
+        }
+      }
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 24px;
+
+      img {
+        height: 21px;
+        cursor: pointer;
+      }
+    }
+  }
+
+
+
+
+
+
+
+  // singly
+  .right-menu {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 15px;
+    top: 50px;
+    z-index: 100000;
+
+    .message,
+    .investment-offer {
+      position: relative;
+      width: 40px;
+      height: 40px;
+      border-radius: 100px;
+      background: white;
+      margin-bottom: 34px;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+
+      .img-bg {
+        width: 45%;
+        height: 45%;
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+
+      .unread-chats-count {
+        position: absolute;
+        right: -7px;
+        bottom: -7px;
+        background: #f00;
+        border-radius: 100px;
+        color: #fff;
+        font-size: 12px;
+        padding: 0 4px;
+        min-height: 20px;
+        min-width: 20px;
+        line-height: 20px;
+        text-align: center;
+        font-weight: bold;
+      }
+
+      &.selected {
+        background: $middleGreen !important;
+      }
+    }
+
+    .message {
+      .img-bg {
+        background-image: url('/images/message.png');
+      }
+
+      &:hover {
+        background: $green;
+      }
+
+      &:hover .img-bg {
+        background-image: url('/images/message-3.png');
+      }
+
+      &.selected .img-bg {
+        background-image: url('/images/message-3.png');
+      }
+    }
+
+    .investment-offer {
+      .img-bg {
+        background-image: url('/images/investment-offer.png');
+      }
+
+      &:hover {
+        background: $green;
+      }
+
+      &:hover .img-bg {
+        background-image: url('/images/investment-offer-hover.png');
+      }
+
+      &.selected .img-bg {
+        background-image: url('/images/investment-offer-hover.png');
+      }
+    }
+  }
+}

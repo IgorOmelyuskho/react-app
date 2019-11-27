@@ -15,7 +15,7 @@ class Vendor extends Component {
 
   render() {
     return (
-      <div className="vendor">
+      <div className="Vendor">
         <Switch>
           <Route path="/vendor/view-projects" component={ViewProjects} />
           <Route path="/vendor/projects" component={VendorProjects} />

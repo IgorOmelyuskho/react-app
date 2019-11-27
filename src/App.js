@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import './App.scss';
 import { BrowserRouter, Route, Link, withRouter, Switch } from "react-router-dom";
 import EmailValidate from './components/EmailValidate/index';
 import 'bootstrap/dist/css/bootstrap.css';

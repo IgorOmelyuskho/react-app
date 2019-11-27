@@ -4,6 +4,7 @@ import './VendorNewProject.scss';
 import { regions } from '../../../assets/regions';
 import FilesService from '../../../services/FileService';
 import ProjectsService from '../../../services/ProjectsService';
+import Progress from '../../Progress/index';
 
 class VendorNewProject extends Component {
   avataraImg;
@@ -113,10 +114,10 @@ class VendorNewProject extends Component {
             <img onClick={this.removePhoto.bind(this, index)} className="remove" src="/images/close-2.png" alt="" />
           </div>
         )}
-      </div>
 
-      <FileUploader parentSubmitted={this.state.submitted} accept="image/*" content="photos" filesUploadedEvent={this.photosUploaded} />
-      {showImagesErr && <div className="error">{this.state.imagesError}</div>}
+        <FileUploader parentSubmitted={this.state.submitted} accept="image/*" content="photos" filesUploadedEvent={this.photosUploaded} />
+        {showImagesErr && <div className="error">{this.state.imagesError}</div>}
+      </div>
 
       <hr />
 
@@ -168,7 +169,7 @@ class VendorNewProject extends Component {
       return;
     }
     this.setState({
-      videos: this.state.videos.concat({url: this.videoLinkInput.current.value}),
+      videos: this.state.videos.concat({ url: this.videoLinkInput.current.value }),
     }, this.validateLinkToVideo);
 
     this.videoLinkInput.current.value = "";
@@ -339,7 +340,6 @@ class VendorNewProject extends Component {
       const avatara = this.avataraData;
       avatara.isAvatara = true;
       request.images.push(avatara);
-
       ProjectsService.createProject(request);
     }
   }

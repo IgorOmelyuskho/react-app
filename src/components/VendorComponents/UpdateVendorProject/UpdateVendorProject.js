@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import  './UpdateVendorProject.scss'; 
+import './UpdateVendorProject.scss';
 import ProjectsService from '../../../services/ProjectsService';
 import { regions } from '../../../assets/regions';
 import FilesService from '../../../services/FileService';
@@ -14,6 +14,7 @@ class UpdateVendorProject extends Component {
   avataraImg = React.createRef();
   videoLinkInput = React.createRef();
   minImgCount = 2;
+  projectId;
 
   constructor(props) {
     super(props);
@@ -43,27 +44,28 @@ class UpdateVendorProject extends Component {
 
   componentDidMount() {
     const splitArr = this.props.history.location.pathname.split('/');
-    const projectId = splitArr[splitArr.length - 1];
+    this.projectId = splitArr[splitArr.length - 1];
     ProjectsService.fetchVendorProjects()
-    .then(projects => {
-      for (let i = 0; i < projects.length; i++) {
-        if (projects[i].id.toString() === projectId) {
-          const project = projects[i];
-          this.setState({
-            isLoaded: true,
-            projectName: project.name,
-            companyName: project.legalEntityName,
-            region: project.region,
-            address: project.address,
-            description: project.description,
-            videos: project.videos,
-            images: project.images,
-          }, this.setFormValid)
-          this.avataraImg.current.src = project.avatara.url;
-          return;
+      .then(projects => {
+        for (let i = 0; i < projects.length; i++) {
+          if (projects[i].id.toString() === this.projectId) {
+            const project = projects[i];
+            this.setState({
+              isLoaded: true,
+              projectName: project.name,
+              companyName: project.legalEntityName,
+              region: project.region,
+              address: project.address,
+              description: project.description,
+              videos: project.videos,
+              images: project.images,
+            }, this.setFormValid)
+            this.avataraImg.current.src = project.avatara.url;
+            this.avataraData = project.avatara;
+            return;
+          }
         }
-      }
-    })
+      })
   }
 
   render() {
@@ -129,14 +131,14 @@ class UpdateVendorProject extends Component {
             <img onClick={this.removePhoto.bind(this, index)} className="remove" src="/images/close-2.png" alt="" />
           </div>
         )}
-      </div>
 
-      <FileUploader parentSubmitted={this.state.submitted} accept="image/*" content="photos" filesUploadedEvent={this.photosUploaded} />
-      {showImagesErr && <div className="error">{this.state.imagesError}</div>}
+        <FileUploader parentSubmitted={this.state.submitted} accept="image/*" content="photos" filesUploadedEvent={this.photosUploaded} />
+        {showImagesErr && <div className="error">{this.state.imagesError}</div>}
+      </div>
 
       <hr />
 
-      <button disabled={!this.state.formValid && this.state.submitted} onClick={this.updateProject}>Update project</button>
+      <button disabled={!this.state.formValid} onClick={this.updateProject}>Update project</button>
     </div>;
   }
 
@@ -184,7 +186,7 @@ class UpdateVendorProject extends Component {
       return;
     }
     this.setState({
-      videos: this.state.videos.concat({url: this.videoLinkInput.current.value}),
+      videos: this.state.videos.concat({ url: this.videoLinkInput.current.value }),
     }, this.validateLinkToVideo);
 
     this.videoLinkInput.current.value = "";
@@ -343,8 +345,6 @@ class UpdateVendorProject extends Component {
   }
 
   updateProject = () => {
-    this.setState({ submitted: true });
-
     if (this.state.formValid) {
       const request = {
         ...this.state,
@@ -352,11 +352,10 @@ class UpdateVendorProject extends Component {
         name: this.state.projectName,
         legalEntityName: this.state.companyName
       }
-      const avatara = this.state.avatara;
+      const avatara = this.avataraData;
       avatara.isAvatara = true;
       request.images.push(avatara);
-
-      ProjectsService.updateVendorProject(request);
+      ProjectsService.updateVendorProject(this.projectId, request);
     }
   }
 }

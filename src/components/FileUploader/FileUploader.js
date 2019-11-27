@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import FileService from '../../services/FileService';
+import './FileUploader.scss';
+import Progress from '../Progress/index';
 
 class FileUploader extends Component {
   formData = null;
@@ -30,11 +32,11 @@ class FileUploader extends Component {
   }
 
   render() {
-    return <div className="files-uploader">
+    return <div className="FileUploader">
       <div className="input-group">
         <div className="container-fluid">
           <div className="row flex-nowrap">
-            <div className="custom-file col-9">
+            <div className="custom-file">
               <input multiple onChange={this.handleFilesSelect} accept={this.props.accept} type="file" className="custom-file-input" />
               <label className="custom-file-label">choose
               {this.props.content === 'files' && <span>contentFiles</span>}
@@ -51,7 +53,7 @@ class FileUploader extends Component {
           {this.minCountValid() === false && <div>maxFilesCount {this.props.minCount}</div>}
           {this.minCountValid() === false && <div>minFilesCount {this.props.maxCount}</div>}
           {this.maxSizeValid() === false && <div>maxFileSize {this.props.maxSize}</div>}
-          {this.state.filesIsUploaded === false && this.allFieldsValid() === true && this.state.files.length !== 0 && <div>uploadFiles</div>}
+          {this.state.filesIsUploaded === false && this.allFieldsValid() === true && this.state.files.length !== 0 && <Progress fixed={false} />}
         </div>}
       </div>
       <div>

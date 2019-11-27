@@ -1,0 +1,9 @@
+.Progress {
+  top: 0;
+  z-index: 1000000;
+  width: 100%;
+
+  .progress {
+    height: 4px;
+  }
+}

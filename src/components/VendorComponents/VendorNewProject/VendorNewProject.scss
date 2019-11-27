@@ -2,7 +2,6 @@
   font-weight: normal;
 
   input {
-    margin: 5px;
     margin-bottom: 0;
   }
 
@@ -38,6 +37,9 @@
   }
 
   .photos {
+    width: 90%;
+    margin: auto;
+
     .photo {
       position: relative;
       margin: auto;

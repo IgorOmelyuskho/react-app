@@ -17,12 +17,21 @@ import SharedHeader from './components/SharedHeader/index';
 
 import AuthService from './services/AuthService';
 import { useInterceptor } from './services/AddTokenInterceptor';
+import { TranslateService } from './services/TranslateService';
 
 class App extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      changeLanguage: ""
+    }
     useInterceptor();
     AuthService.init();
+    TranslateService.changeLanguageEvent$.subscribe(
+      val => {
+        this.setState({changeLanguage: Math.random()})
+      }
+    )
   }
 
   render() {

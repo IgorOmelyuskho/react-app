@@ -22,7 +22,6 @@ class Map extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
     if (nextProps.replace3DObjects != null) {
       for (let i = 0; i < nextProps.replace3DObjects.length; i++) {
         nextProps.replace3DObjects[i].coords = {};

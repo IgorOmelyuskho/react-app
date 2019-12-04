@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-import './VendorHeader.css';
 import { Route, Link, withRouter, Redirect, Switch } from "react-router-dom";
 import AuthService from '../../../services/AuthService';
+import { TranslateService, translate } from '../../../services/TranslateService';
+import './VendorHeader.scss';
 
 class VendorHeader extends Component {
+  self = 'VendorHeader';
+
   render() {
     const SignOutButton = () => (  /* 2 way */
       <Route render={({ history }) => (
@@ -12,32 +15,37 @@ class VendorHeader extends Component {
           type='button'
           onClick={() => { AuthService.signOut() }}
         >
-          SignOut
+          {translate(this.self, 'signOut')}
         </button>
       )} />
     )
 
-    return <nav className="navbar navbar-dark bg-dark">
+    return <nav className="VendorHeader navbar navbar-dark bg-dark">
       <Link to="/">
         <span className="navbar-brand mb-0 h1">IIUA</span>
       </Link>
       <div className='navbar-text'>VENDOR Navbar</div>
       <span className='d-flex'>
         <Link className="nav-link" to="/vendor/main">
-          Main
-        <span className="sr-only">(current)</span>
+          {translate(this.self, 'main')}
         </Link>
         <Link className="nav-link" to="/vendor/view-projects">
-          All Projects
-        <span className="sr-only">(current)</span>
+          {translate(this.self, 'allProjects')}
         </Link>
         <Link className="nav-link" to="/vendor/projects">
-          My Projects
-        <span className="sr-only">(current)</span>
+          {translate(this.self, 'myProjects')}
         </Link>
+        <select defaultValue={TranslateService.lang === 'en' ? 'en' : 'ru'} className="language" onChange={this.setLanguage.bind(this)}>
+          <option value="ru">Ru</option>
+          <option value="en">En</option>
+        </select>
         <SignOutButton />
       </span>
     </nav>
+  }
+
+  setLanguage = (event) => {
+    TranslateService.setLanguage(event.target.value);
   }
 }
 

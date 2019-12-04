@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import './SignIn.css';
 import AuthService from '../../services/AuthService';
 import * as NotificationService from '../../services/NotificationService';
+import { translate } from '../../services/TranslateService';
 
 class SignIn extends Component {
+  self = 'SignIn';
+
   constructor(props) {
     super(props);
     this.state = {
@@ -29,12 +32,12 @@ class SignIn extends Component {
 
         <div className="row">
           <div className="col-6 offset-3">
-            <div>SignIn</div>
+            {translate(this.self, 'signIn')}
             <div className={this.validator.allValid() === true ? 'text-success' : 'text-danger'}>Form is valid: {this.validator.allValid().toString()}, does not work correctly</div>
             <form>
               <div className="mb-3 form-group">
-                <div>Email</div>
-                <input className="form-control" value={this.state.email} onChange={this.emailChange} type="email" name="email" />
+                {translate(this.self, 'email')}
+                <input placeholder={translate(this.self, 'emailPlaceholder')} className="form-control" value={this.state.email} onChange={this.emailChange} type="email" name="email" />
                 <div className="error">
                   {this.state.submitted ? (<div>
                     {this.validator.message('email', this.state.email, 'required|email')}
@@ -43,16 +46,16 @@ class SignIn extends Component {
               </div>
 
               <div className="mb-3 form-group">
-                <div>Password</div>
-                <input className="form-control" value={this.state.password} onChange={this.passwordChange} type="password" name="password" />
+                {translate(this.self, 'password')}
+                <input placeholder={translate(this.self, 'passwordPlaceholder')} className="form-control" value={this.state.password} onChange={this.passwordChange} type="password" name="password" />
                 <div className="error">
                   {this.state.submitted ? (<div>
-                    { this.validator.message('password', this.state.password, 'required|min:6')}
+                    {this.validator.message('password', this.state.password, 'required|min:6')}
                   </div>) : null}
                 </div>
               </div>
 
-              <button disabled={!this.validator.allValid() && this.state.submitted === true} className="btn btn-success" type="button" onClick={this.submitForm}>Sign in</button>
+              <button disabled={!this.validator.allValid() && this.state.submitted === true} className="btn btn-success" type="button" onClick={this.submitForm}>{translate(this.self, 'signInBtn')}</button>
 
             </form>
           </div>

@@ -3,6 +3,7 @@ import './Header.css';
 import { Route, Link, withRouter, Redirect, Switch } from "react-router-dom";
 import my_history_2 from '../../services/HistoryModule';
 import AuthService from '../../services/AuthService';
+import { TranslateService } from '../../services/TranslateService';
 
 class Header extends Component {
   constructor(props) {
@@ -59,17 +60,19 @@ class Header extends Component {
           <button onClick={() => { my_history_2.push('/test_router_2') }}>click_2</button>  {/* 6 way */}
           {this.renderRedirect()}
           <button onClick={this.setRedirect}>Home</button>  {/* 7 way */}
-          <Link className="nav-link" to="/signin">
-            Sign in
-            <span className="sr-only">(current)</span>
-          </Link>
-          <Link className="nav-link" to="/signup">
-            Sign up
-            <span className="sr-only">(current)</span>
-          </Link>
+          <Link className="nav-link" to="/signin">Sign in</Link>
+          <Link className="nav-link" to="/signup"> Sign up</Link>
+          <select defaultValue={TranslateService.lang === 'en' ? 'en' : 'ru'} className="language" onChange={this.setLanguage.bind(this)}>
+            <option value="ru">Ru</option>
+            <option value="en">En</option>
+          </select>
         </span>
       </nav>
     );
+  }
+
+  setLanguage = (event) => {
+    TranslateService.setLanguage(event.target.value);
   }
 
   setRedirect = () => {  /* for 7 way */

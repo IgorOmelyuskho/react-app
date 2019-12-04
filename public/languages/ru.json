@@ -1,0 +1,20 @@
+{
+  "VendorHeader": {
+    "main": "Главная",
+    "allProjects": "Все проекты",
+    "myProjects": "Мои проекты",
+    "signOut": "Выйти"
+  },
+  "VendorMainRight": {
+    "chat": "Чат",
+    "investmentOffer": "Предложения инвестицый"
+  },
+  "SignIn": {
+    "signIn": "Вход",
+    "email": "Емайл",
+    "emailPlaceholder": "Введите емайл",
+    "password": "Пароль",
+    "passwordPlaceholder": "Введите пароль",
+    "signInBtn": "ВОЙТИ"
+  }
+}

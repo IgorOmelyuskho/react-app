@@ -4,6 +4,7 @@ import axios from 'axios';
 import { environment } from '../environment';
 import history from './HistoryModule';
 import Navigate from './ForProgramRouting/Navigate';
+import { TranslateService } from './TranslateService';
 const jwtDecode = require('jwt-decode');
 
 export default class AuthService {
@@ -81,6 +82,8 @@ export default class AuthService {
   }
 
   static init() {
+    TranslateService.setLanguage('ru');
+
     const token = localStorage.getItem('token');
     let decodedToken;
     let isExpired;

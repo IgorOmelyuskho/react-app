@@ -81,9 +81,18 @@
     display: flex;
     flex-direction: column;
     position: absolute;
-    right: 15px;
-    top: 50px;
+    right: 0px;
     z-index: 100000;
+
+    .close-menu {
+      height: 21px;
+      width: 21px;
+      margin: auto;
+      position: absolute;
+      top: -30px;
+      left: 10px;
+      cursor: pointer;
+    }
 
     .message,
     .investment-offer {

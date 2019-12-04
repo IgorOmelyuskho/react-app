@@ -1,0 +1,20 @@
+{
+  "VendorHeader": {
+    "main": "Main",
+    "allProjects": "All projects",
+    "myProjects": "My projects",
+    "signOut": "Sign out"
+  },
+  "VendorMainRight": {
+    "chat": "Chat",
+    "investmentOffer": "Investment offer"
+  },
+  "SignIn": {
+    "signIn": "Sign in",
+    "email": "Email",
+    "emailPlaceholder": "Enter email",
+    "password": "Password",
+    "passwordPlaceholder": "Enter password",
+    "signInBtn": "SIGN IN"
+  }
+}

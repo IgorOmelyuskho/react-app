@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import FileService from '../../services/FileService';
 import './FileUploader.scss';
 import Progress from '../Progress/index';
+import PropTypes from 'prop-types';
 
 class FileUploader extends Component {
   formData = null;
@@ -29,6 +30,16 @@ class FileUploader extends Component {
     maxSize: 5 * 1024 * 1024,
     parentSubmitted: false,
     accept: '*'
+  }
+
+  static propTypes = {
+    minCount: PropTypes.number,
+    maxCount: PropTypes.number,
+    maxSize: PropTypes.number,
+    parentSubmitted: PropTypes.bool,
+    accept: PropTypes.string,
+    // content: PropTypes.string.isRequired
+    content: PropTypes.oneOf(['photos', 'files'])
   }
 
   render() {

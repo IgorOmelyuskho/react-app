@@ -26,7 +26,7 @@ class Map extends Component {
       for (let i = 0; i < nextProps.replace3DObjects.length; i++) {
         nextProps.replace3DObjects[i].coords = {};
         nextProps.replace3DObjects[i].coords.x = 35.028 + Math.random() * 0.004;
-        nextProps.replace3DObjects[i].coords.y = 48.474 + Math.random() * 0.004;;
+        nextProps.replace3DObjects[i].coords.y = 48.474 + Math.random() * 0.004;
       }
 
       if (this.mapIsFinishInit === true) {

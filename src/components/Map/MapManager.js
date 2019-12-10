@@ -4,7 +4,8 @@ import { BehaviorSubject, ReplaySubject } from 'rxjs';
 import { regionalCentersCoords } from '../../../src/assets/regional-centers-coords';
 import AuthService from '../../services/AuthService';
 
-var MapZoomEnum;
+let MapZoomEnum;
+// eslint-disable-next-line no-shadow
 (function (MapZoomEnum) {
   MapZoomEnum["BIG"] = "BIG";
   MapZoomEnum["AVG"] = "AVG";

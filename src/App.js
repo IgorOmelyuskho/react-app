@@ -19,18 +19,14 @@ import AuthService from './services/AuthService';
 import { useInterceptor } from './services/AddTokenInterceptor';
 import { TranslateService } from './services/TranslateService';
 
+
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      changeLanguage: ""
-    }
     useInterceptor();
     AuthService.init();
     TranslateService.changeLanguageEvent$.subscribe(
-      val => {
-        this.setState({changeLanguage: Math.random()})
-      }
+      val => (this.forceUpdate())
     )
   }
 
@@ -44,27 +40,27 @@ class App extends Component {
     )
 
     return (
-      <div className="App">
-        <ReactNotification />
-        <BrowserRouter>
-          <div>
-            <ForProgramRouting />
-            <SharedHeader />
-            <Switch>
-              <Route exact path="/" component={Index} />
-              {/* <Route path="/signin" component={SignIn} /> */}
-              <Route path="/signin" render={matchProps => <SignIn {...matchProps} />} />
-              <Route path="/signup" component={SignUp} />
-              <Route path="/test_router" component={TestRouter} />
-              <Route path="/test_router_2" component={TestRouter_2} />
-              <Route path="/signup" component={SignUp} />
-              <Route path="/email-validate/:code" component={EmailValidate} />
-              <Route path="/vendor" component={Vendor} />
-              <Route component={Index} /> {/* redirect */}
-            </Switch>
-          </div>
-        </BrowserRouter>
-      </div>
+        <div className="App">
+          <ReactNotification />
+          <BrowserRouter>
+            <div>
+              <ForProgramRouting />
+              <SharedHeader />
+              <Switch>
+                <Route exact path="/" component={Index} />
+                {/* <Route path="/signin" component={SignIn} /> */}
+                <Route path="/signin" render={matchProps => <SignIn {...matchProps} />} />
+                <Route path="/signup" component={SignUp} />
+                <Route path="/test_router" component={TestRouter} />
+                <Route path="/test_router_2" component={TestRouter_2} />
+                <Route path="/signup" component={SignUp} />
+                <Route path="/email-validate/:code" component={EmailValidate} />
+                <Route path="/vendor" render={() => <Vendor store={this.props.store}/>} />
+                <Route component={Index} /> {/* redirect */}
+              </Switch>
+            </div>
+          </BrowserRouter>
+        </div>
     );
   }
 }

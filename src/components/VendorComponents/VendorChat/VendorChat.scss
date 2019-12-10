@@ -1,9 +1,35 @@
 .VendorChat {
+  padding: 0 100px;
   left: 0;
   top: 56px;
   width: 100vw;
   height: calc(100vh);
   background: #fff;
-  font-size: 30px;
+  font-size: 20px;
   position: fixed;
+
+  .users {
+    .users-header {
+      display: flex;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+
+    .user {
+      border: 1px solid orange;
+      margin: 5px;
+      display: flex;
+      justify-content: space-between;
+      cursor: pointer;
+
+      &.select {
+        background: blanchedalmond;
+      }
+
+      .remove {
+        background: palevioletred;
+        cursor: pointer;
+      }
+    }
+  }
 }

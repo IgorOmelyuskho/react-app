@@ -90,7 +90,7 @@ class SignUpVendor extends Component {
                 {rePassword && <div className="invalid-feedback">{this.state.rePasswordError}</div>}
               </div>
 
-              <button className="btn btn-success" type="button" onClick={this.signUp}>Sign up</button>
+              <button disabled={this.state.formValid === false && this.state.submitted === true} className="btn btn-success" type="button" onClick={this.signUp}>Sign up</button>
 
             </form>
           </div>
@@ -102,7 +102,7 @@ class SignUpVendor extends Component {
   handleUserInput = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    this.setState({ [name]: value }, () => { this.validateField(name, value) });
+    this.setState({ [name]: value },  this.validateField(name, value));
   }
 
   validateField(fieldName, value) {
@@ -212,8 +212,7 @@ class SignUpVendor extends Component {
         if (response.data == null || response.data.token == null) {
           NotificationService.notify('Check you email');
         }
-      }
-      )
+      })
       .catch((error) => {
         NotificationService.notify(error.response.data.error.errorMessage[0]);
       });

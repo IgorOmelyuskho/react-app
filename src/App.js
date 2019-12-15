@@ -19,6 +19,12 @@ import AuthService from './services/AuthService';
 import { useInterceptor } from './services/AddTokenInterceptor';
 import { TranslateService } from './services/TranslateService';
 
+import { createStore, applyMiddleware } from 'redux';
+import rootReducer from '../src/store/reducers';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+
+export const store = createStore(rootReducer, applyMiddleware(thunk));
 
 class App extends Component {
   constructor(props) {
@@ -26,7 +32,10 @@ class App extends Component {
     useInterceptor();
     AuthService.init();
     TranslateService.changeLanguageEvent$.subscribe(
-      val => (this.forceUpdate())
+      val => { this.forceUpdate() }
+    );
+    store.subscribe(
+      val => { console.log(store.getState()) }
     )
   }
 
@@ -40,6 +49,7 @@ class App extends Component {
     )
 
     return (
+      <Provider store={store}>
         <div className="App">
           <ReactNotification />
           <BrowserRouter>
@@ -55,12 +65,13 @@ class App extends Component {
                 <Route path="/test_router_2" component={TestRouter_2} />
                 <Route path="/signup" component={SignUp} />
                 <Route path="/email-validate/:code" component={EmailValidate} />
-                <Route path="/vendor" render={() => <Vendor store={this.props.store}/>} />
+                <Route path="/vendor" render={() => <Vendor store={this.props.store} />} />
                 <Route component={Index} /> {/* redirect */}
               </Switch>
             </div>
           </BrowserRouter>
         </div>
+      </Provider>
     );
   }
 }

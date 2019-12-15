@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './VendorMainRight.scss';
 import classNames from 'classnames';
 import VendorChat from '../VendorChat/index';
+import VendorChatContainer from '../VendorChat/VendorChatContainer';
 import VendorInvestmentOffer from '..//VendorInvestmentOffer/index';
 import { translate } from '../../../services/TranslateService';
 
@@ -18,7 +19,7 @@ class VendorMainRight extends Component {
 
   render() {
     return <div className="VendorMainRight">
-      {this.state.messages_show && <VendorChat />}
+      {this.state.messages_show && <VendorChatContainer />}
       {this.state.investment_offer_show && <VendorInvestmentOffer />}
 
       {/* right menu  */}

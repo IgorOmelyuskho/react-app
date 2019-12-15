@@ -5,7 +5,7 @@ const defaultState = {
   password: '',
 }
 
-export const authReducer = (state = defaultState, action) => {
+const authReducer = (state = defaultState, action) => {
   switch (action.type) {
     case AUTH_CHANGE_EMAIL_TEXT:
       return {
@@ -20,3 +20,5 @@ export const authReducer = (state = defaultState, action) => {
     default: return state
   }
 }
+
+export default authReducer;

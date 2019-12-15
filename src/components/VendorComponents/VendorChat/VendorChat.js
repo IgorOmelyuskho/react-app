@@ -1,43 +1,34 @@
 import React, { Component } from 'react';
 import './VendorChat.scss';
-import { store } from '../../../index';
-import {
-    setEmailText,
-    setPasswordText,
-    setRePasswordText,
-    addUser,
-    removeUser,
-    sortUserByEmail,
-    sortUserByPassword,
-    sortUserById,
-    sortDefault,
-    setSelectedUser,
-    changeSelectedUser
-} from '../../../store/VendorChat/actions';
+import Progress from '../../Progress';
+
 
 class VendorChat extends Component {
   usersRef = React.createRef();
 
   componentDidMount() {
-    store.dispatch(sortDefault())
+    this.props.sortDefault();
   }
 
   render() {
+    console.log(this.props.loaderVisible);
     return <div className="VendorChat">
-      <input onChange={this.onEmailChange} value={store.getState().registration.email} placeholder="Email" type="text" /> {/* work without value */}
-      <input onChange={this.onPasswordChange} value={store.getState().registration.password} placeholder="Password" type="text" /> {/* work without value */}
-      <input onChange={this.onRePasswordChange} value={store.getState().registration.rePassword} placeholder="Re password" type="text" /> {/* work without value */}
+      {this.props.loaderVisible ? <Progress /> : null}
+      <input onChange={this.onEmailChange} value={this.props.email} placeholder="Email" type="text" />
+      <input onChange={this.onPasswordChange} value={this.props.password} placeholder="Password" type="text" />
+      <input onChange={this.onRePasswordChange} value={this.props.rePassword} placeholder="Re password" type="text" />
       <button onClick={this.addUser}>addUser</button>
       <button onClick={this.changeUserData}>changeUserData</button>
+      <button onClick={this.sortByUserIdAsync}>sortByUserIdAsync</button>
 
       <div ref={this.usersRef} className="users">
-        <div>Users count: {store.getState().registration.users.length}</div>
+        <div>Users count: {this.props.users.length}</div>
         <div className="users-header">
           <div onClick={this.sortById} className="id">Sort by id {this.sortDirection('ID')}</div>
           <div onClick={this.sortByEmail} className="email">Sort by email {this.sortDirection('EMAIL')}</div>
           <div onClick={this.sortByPassword} className="password">Sort by password {this.sortDirection('PASSWORD')}</div>
         </div>
-        {store.getState().registration.users.map((user, index) => <div onClick={this.selectUser.bind(this, user)} key={index} className={this.setClass(user)}>
+        {this.props.users.map((user, index) => <div onClick={this.selectUser.bind(this, user)} key={index} className={this.setClass(user)}>
           <div>{user.id}</div>
           <div>{user.email}</div>
           <div>{user.password}</div>
@@ -47,20 +38,20 @@ class VendorChat extends Component {
     </div>;
   }
 
+  sortByUserIdAsync = () => {
+    this.props.sortByUserIdAsync();
+  }
+
   changeUserData = (user) => {
-    store.dispatch(changeSelectedUser(store.getState().registration.email, store.getState().registration.password, store.getState().registration.rePassword))
+    this.props.changeSelectedUserData(this.props.email, this.props.password, this.props.rePassword)
   }
 
   selectUser = (user) => {
-    if (user === store.getState().registration.selectUser) {
-      store.dispatch(setSelectedUser(null))
-    } else {
-      store.dispatch(setSelectedUser(user))
-    }
+    this.props.setSelectedUser(user, true)
   }
 
   setClass = (user) => {
-    if (store.getState().registration.selectedUser === user) {
+    if (this.props.selectedUser === user) {
       return 'user select'
     }
 
@@ -68,7 +59,7 @@ class VendorChat extends Component {
   }
 
   sortDirection = (sortField) => {
-    const sortedBy = store.getState().registration.usersSortBy;
+    const sortedBy = this.props.usersSortBy;
     if (sortField === 'ID') {
       return sortedBy === 'id' ? '+' : sortedBy === '-id' ? '-' : ''
     }
@@ -81,36 +72,36 @@ class VendorChat extends Component {
   }
 
   onEmailChange = (event) => {
-    store.dispatch(setEmailText(event.target.value));
+    this.props.setEmailText(event.target.value);
   }
 
   onPasswordChange = (event) => {
-    store.dispatch(setPasswordText(event.target.value));
+    this.props.setPasswordText(event.target.value);
   }
 
   onRePasswordChange = (event) => {
-    store.dispatch(setRePasswordText(event.target.value));
+    this.props.setRePasswordText(event.target.value);
   }
 
   addUser = () => {
-    store.dispatch(addUser(store.getState().registration.email, store.getState().registration.password, store.getState().registration.rePassword));
+    this.props.addUser(this.props.email, this.props.password, this.props.rePassword);
   }
 
   removeUser = (id, event) => {
     event.stopPropagation();
-    store.dispatch(removeUser(id));
+    this.props.removeUser(id);
   }
 
   sortByEmail = () => {
-    store.dispatch(sortUserByEmail())
+    this.props.sortUserByEmail();
   }
 
   sortByPassword = () => {
-    store.dispatch(sortUserByPassword())
+    this.props.sortUserByPassword();
   }
 
   sortById = () => {
-    store.dispatch(sortUserById())
+    this.props.sortUserById();
   }
 }
 

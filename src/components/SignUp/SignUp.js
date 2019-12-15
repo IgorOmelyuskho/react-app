@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './SignUp.css';
 import SignUpVendor from '../SignUpVendor/SignUpVendor';
+import SignUpVendorRedux from '../SignUpVendorRedux/SignUpVendorRedux';
+import SignUpVendorReduxContainer from '../SignUpVendorRedux/SignUpVendorReduxContainer';
 import SignUpInvestor from '../SignUpInvestor/SignUpInvestor';
 
 class SignUp extends Component {
@@ -23,7 +25,7 @@ class SignUp extends Component {
   render() {
     let signUpComponent;
     if (this.state.userRole === "Vendor") {
-      signUpComponent = <SignUpVendor />;
+      signUpComponent = <SignUpVendorReduxContainer />;
     }
     if (this.state.userRole === "Investor") {
       signUpComponent = <SignUpInvestor />;

@@ -1,0 +1,20 @@
+/*
+ * SignUpVendor css File
+*/
+
+.SignUpVendor { 
+    font-weight: normal;
+}
+
+.errors {
+  color: red;
+}
+
+.error11 {
+  font-size: 30px;
+  color: red;
+}
+
+.role {
+  font-size: 20px;
+}

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './VendorInvestmentOffer.scss';
-import { store } from '../../../index';
+import { store } from '../../../App';
 import { setEmailText, setPasswordText } from '../../../store/VendorInvestmentOffer/actions';
 import {
     setRePasswordText,
@@ -11,10 +11,29 @@ import {
     sortUserById,
     sortDefault
 } from '../../../store/VendorChat/actions';
+import { fromEvent } from 'rxjs';
+import { tap, map, filter, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 class VendorInvestmentOffer extends Component {
+  inputRef = React.createRef();
+  fromEvent$;
+
   componentDidMount() {
-    store.dispatch(sortDefault())
+    store.dispatch(sortDefault());
+
+    this.fromEvent$ = fromEvent(this.inputRef.current, 'input')
+    .pipe(
+      map(e => e.target.value),
+      debounceTime(1000),
+      filter(e => e.length >= 3),
+      distinctUntilChanged((a, b) => a === b),
+      tap(res => {
+        // this.searchByScroll = false;
+      })
+    )
+    .subscribe(res => {
+      console.log(res);
+    });
   }
 
   render() {
@@ -22,8 +41,8 @@ class VendorInvestmentOffer extends Component {
     const password = store.getState().auth.password;
 
     return <div className="VendorInvestmentOffer">
-      <input onChange={this.onEmailChange} value={email} placeholder="Email" type="text"/> {/* work without value */}
-      <input onChange={this.onPasswordChange} value={password} placeholder="Password" type="text"/> {/* work without value */}
+      <input onChange={this.onEmailChange} value={email} placeholder="Email" type="text"/> 
+      <input onChange={this.onPasswordChange} value={password} placeholder="Password" type="text"/>
       <button>SignUp</button>
 
       <div className="users">
@@ -39,6 +58,8 @@ class VendorInvestmentOffer extends Component {
           <div>{user.password}</div>
           <div onClick={this.removeUser.bind(this, user.id)} className="remove">remove</div>
         </div>)}
+
+        <input ref={this.inputRef} placeholder="RXJS" type="text"/>
       </div>
     </div>;
   }

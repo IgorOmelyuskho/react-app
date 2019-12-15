@@ -1,15 +1,16 @@
 import {
-  REGISTRATION_CHANGE_EMAIL_TEXT,
-  REGISTRATION_CHANGE_RE_PASSWORD_TEXT,
-  REGISTRATION_CHANGE_PASSWORD_TEXT,
-  REGISTRATION_ADD_USER,
-  REGISTRATION_REMOVE_USER,
-  REGISTRATION_SORT_USER_BY_EMAIL,
-  REGISTRATION_SORT_USER_BY_PASSWORD,
-  REGISTRATION_SORT_USER_BY_ID,
-  REGISTRATION_SORT_DEFAULT,
-  REGISTRATION_SET_SELECTED_USER,
-  REGISTRATION_CHANGE_SELECTED_USER
+    REGISTRATION_CHANGE_EMAIL_TEXT,
+    REGISTRATION_CHANGE_RE_PASSWORD_TEXT,
+    REGISTRATION_CHANGE_PASSWORD_TEXT,
+    REGISTRATION_ADD_USER,
+    REGISTRATION_REMOVE_USER,
+    REGISTRATION_SORT_USER_BY_EMAIL,
+    REGISTRATION_SORT_USER_BY_PASSWORD,
+    REGISTRATION_SORT_USER_BY_ID,
+    REGISTRATION_SORT_DEFAULT,
+    REGISTRATION_SET_SELECTED_USER,
+    REGISTRATION_CHANGE_SELECTED_USER,
+    REGISTRATION_SET_LOADER_VISIBLE
 } from './actions';
 
 
@@ -20,10 +21,11 @@ const defaultState = {
   users: [],
   usersSortBy: 'id', // id, -id, email, -email, password, -password
   usersId: 0,
-  selectedUser: null
+  selectedUser: null,
+  loaderVisible: false
 }
 
-export const registrationReducer = (state = defaultState, action) => {
+const registrationReducer = (state = defaultState, action) => {
   switch (action.type) {
     case REGISTRATION_CHANGE_EMAIL_TEXT:
       return {
@@ -89,7 +91,7 @@ export const registrationReducer = (state = defaultState, action) => {
     case REGISTRATION_SET_SELECTED_USER:
       return {
         ...state,
-        selectedUser: action.payload
+        selectedUser: (action.payload.user === state.selectedUser && action.payload.setNull === true) ? null : action.payload.user
       }
     case REGISTRATION_CHANGE_SELECTED_USER: {
       let updatedUser;
@@ -113,6 +115,13 @@ export const registrationReducer = (state = defaultState, action) => {
       }
     }
 
+    case REGISTRATION_SET_LOADER_VISIBLE: 
+    console.log('REGISTRATION_SET_LOADER_VISIBLE');
+    return {
+      ...state,
+      loaderVisible: action.payload
+    }
+
     default: return state;
   }
 }
@@ -128,3 +137,5 @@ function dynamicSort(property) {
     return result * sortOrder;
   }
 }
+
+export default registrationReducer;

@@ -15,10 +15,9 @@ class Progress extends Component {
       style.position = 'block'
     }
 
-
     return <div style={style} className="Progress">
-      <div class="progress">
-        <div class="progress-bar progress-bar-striped progress-bar-animated w-100" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+      <div className="progress">
+        <div className="progress-bar progress-bar-striped progress-bar-animated w-100" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
       </div>
     </div>;
   }

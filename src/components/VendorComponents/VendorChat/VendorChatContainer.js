@@ -12,7 +12,8 @@ import {
   sortDefault,
   setSelectedUser,
   changeSelectedUserData,
-  sortByUserIdAsync
+  sortByUserIdAsync,
+  applyFilter
 } from '../../../store/VendorChat/actions';
 import VendorChat from './index';
 import { connect } from 'react-redux';
@@ -53,7 +54,9 @@ const mapStateToProps = state => {
     users: st.users,
     selectedUser: st.selectedUser,
     usersSortBy: st.usersSortBy,
-    loaderVisible: st.loaderVisible
+    loaderVisible: st.loaderVisible,
+    usersFilter: st.usersFilter,
+    usersFiltered: st.usersFiltered
   }
 }
 
@@ -69,7 +72,8 @@ const mapDispatchToProps = {
   sortUserById,
   setSelectedUser,
   changeSelectedUserData,
-  sortByUserIdAsync
+  sortByUserIdAsync,
+  applyFilter
 }
 
 // for way 2

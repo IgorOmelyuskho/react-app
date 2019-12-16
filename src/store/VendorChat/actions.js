@@ -10,6 +10,7 @@ export const REGISTRATION_SORT_DEFAULT = 'REGISTRATION_SORT_DEFAULT';
 export const REGISTRATION_SET_SELECTED_USER = 'REGISTRATION_SET_SELECTED_USER';
 export const REGISTRATION_CHANGE_SELECTED_USER = 'REGISTRATION_CHANGE_SELECTED_USER';
 export const REGISTRATION_SET_LOADER_VISIBLE = 'REGISTRATION_SET_LOADER_VISIBLE';
+export const REGISTRATION_APPLY_FILTER = 'REGISTRATION_APPLY_FILTER';
 
 
 // action creators
@@ -73,6 +74,11 @@ export const changeSelectedUserData = (email, password, rePassword) => ({
 export const setLoaderVisible = (visible) => ({
   type: REGISTRATION_SET_LOADER_VISIBLE,
   payload: visible
+})
+
+export const applyFilter = (filter) => ({
+  type: REGISTRATION_APPLY_FILTER,
+  payload: filter
 })
 
 

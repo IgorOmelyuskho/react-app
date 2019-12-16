@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { ReplaySubject } from 'rxjs';
-import { cacheName,cacheAddOrFetch } from './cache';
+import { cacheName,cacheAddOrFetch } from './Cache';
 
 export class TranslateService {
   static data = {};

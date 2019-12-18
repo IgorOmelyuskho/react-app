@@ -15,7 +15,7 @@ class SignUpVendor extends Component {
       formValid: false,
       submitted: false,
       fullName: "",
-      fullNameError: 'fullName is required',
+      fullNameError: 'FullName is required',
       // itn: "",
       // itnError: 'ITN is required',
       // phone: "",
@@ -195,8 +195,6 @@ class SignUpVendor extends Component {
       emailError: emailError,
       passwordError: passwordError,
       rePasswordError: rePasswordError,
-    }, () => { // because setState async
-      // console.log(this.state.formValid);
     });
   }
 

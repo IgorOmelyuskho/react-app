@@ -31,6 +31,18 @@ export const store = createStore(rootReducer, composeWithDevTools(
   applyMiddleware(thunk),
 ));
 
+const themes = {
+  light: {
+    foreground: "#000000",
+    background: "#eeeeee"
+  },
+  dark: {
+    foreground: "#ffffff",
+    background: "#222222"
+  }
+};
+export const ThemeContext = React.createContext(themes.light);
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -55,6 +67,7 @@ class App extends Component {
 
     return (
       <Provider store={store}>
+        <ThemeContext.Provider value={themes.light}>
         <div className="App">
           <ReactNotification />
           <BrowserRouter>
@@ -76,6 +89,7 @@ class App extends Component {
             </div>
           </BrowserRouter>
         </div>
+        </ThemeContext.Provider>
       </Provider>
     );
   }

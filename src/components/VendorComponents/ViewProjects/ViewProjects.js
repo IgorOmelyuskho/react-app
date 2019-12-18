@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './ViewProjects.css';
+import ReactHooks from '../../ReactHooks';
 
 
 class ViewProjects extends Component {
@@ -11,7 +12,9 @@ class ViewProjects extends Component {
 
   render() {
     return (
-      <div className="container">ViewProjects
+      <div className="container">
+        <div>ViewProjects</div>
+        <ReactHooks />
       </div>
     );
   }

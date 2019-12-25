@@ -5,10 +5,14 @@ import { environment } from '../environment';
 import history from './HistoryModule';
 import Navigate from './ForProgramRouting/Navigate';
 import { TranslateService } from './TranslateService';
+import * as NotificationService from '../services/NotificationService';
 const jwtDecode = require('jwt-decode');
 
 export default class AuthService {
   static user;
+  static needEmailForSocialLogin = false;
+  static userRoleForRegister;
+  static provider; // GOOGLE FACEBOOK
 
   static getUseRole() {
     try {
@@ -159,5 +163,65 @@ export default class AuthService {
 
     if (role === UserRole.ProjectUser) {
     }
+  }
+
+  static socialUserLogin(user) {
+    return axios.post(environment.auth + environment.socialAuth, user);
+  }
+
+  static createSocialUserDto(user) {
+    let resultToken = '';
+    if (user.provider.toUpperCase() === 'FACEBOOK') {
+      resultToken = user.authToken;
+    }
+    if (user.provider.toUpperCase() === 'GOOGLE') {
+      resultToken = user.idToken;
+    }
+
+    const result = {
+      token: resultToken,
+      provider: user.provider.toUpperCase(),
+      email: user.email
+    };
+
+    return result;
+  }
+
+  static socialUserLoginSubscribe(promise) {
+    promise.then(
+      response => {
+        console.log(response);
+        this.needEmailForSocialLogin = false;
+        if (response.data == null) {
+          NotificationService.notify("Check email");
+        } else {
+          this.successSocialOrEmailLogin(response.data.token);
+        }
+      },
+      err => {
+        console.log(err);
+        if (err.error.error.errorMessage[0] === 'User not exist' && err.error.error.code === 8) {
+          NotificationService.notify("First you need to register as User or Company");
+          Navigate.navigateByUrl('signup');
+        }
+        if (err.error.error.errorMessage[0] === 'User email not verified' && err.error.error.code === 8) {
+          NotificationService.notify("User email not verified");
+        }
+      }
+    );
+  }
+
+  static signInWithGoogle(socialUser) {
+    const userData = {
+      ...socialUser.profile,
+      ...socialUser.token,
+      provider: socialUser.provider
+    };
+    const userForLogin = this.createSocialUserDto(userData);
+    this.socialUserLoginSubscribe(this.socialUserLogin(userForLogin));
+  }
+
+  static signInWithFB() {
+
   }
 }

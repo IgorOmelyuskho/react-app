@@ -65,6 +65,8 @@ class App extends Component {
       <h1>TestRouter_2</h1>
     )
 
+    console.log(store);
+
     return (
       <Provider store={store}>
         <ThemeContext.Provider value={themes.light}>
@@ -81,7 +83,6 @@ class App extends Component {
                 <Route path="/signup" component={SignUp} />
                 <Route path="/test_router" component={TestRouter} />
                 <Route path="/test_router_2" component={TestRouter_2} />
-                <Route path="/signup" component={SignUp} />
                 <Route path="/email-validate/:code" component={EmailValidate} />
                 <Route path="/vendor" render={() => <Vendor store={this.props.store} />} />
                 <Route component={Index} /> {/* redirect */}

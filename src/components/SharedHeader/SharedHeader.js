@@ -7,8 +7,8 @@ import AuthService from '../../services/AuthService';
 class SharedHeader extends Component {
   render() {
     return <div>
-      {AuthService.user == null && <Header history={history} />}
-      {AuthService.user != null && <VendorHeader history={history} />}
+      {AuthService.user$.value == null && <Header history={history} />}
+      {AuthService.user$.value != null && <VendorHeader history={history} />}
     </div>;
   }
 }

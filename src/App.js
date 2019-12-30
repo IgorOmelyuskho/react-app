@@ -63,9 +63,7 @@ class App extends Component {
 
     const TestRouter_2 = () => (
       <h1>TestRouter_2</h1>
-    )
-
-    console.log(store);
+    )   
 
     return (
       <Provider store={store}>

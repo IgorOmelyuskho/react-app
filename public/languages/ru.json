@@ -3,7 +3,8 @@
     "main": "Главная",
     "allProjects": "Все проекты",
     "myProjects": "Мои проекты",
-    "signOut": "Выйти"
+    "signOut": "Выйти",
+    "profile": "Профиль"
   },
   "VendorMainRight": {
     "chat": "Чат",

@@ -35,7 +35,7 @@ class Header extends Component {
         <button
           className="btn btn-primary"
           type='button'
-          onClick={() => { AuthService.signOut() }}
+          onClick={this.signOut}
         >
           SignOut
         </button>
@@ -69,6 +69,10 @@ class Header extends Component {
         </span>
       </nav>
     );
+  }
+
+  signOut = () => {
+    AuthService.signOut();
   }
 
   setLanguage = (event) => {

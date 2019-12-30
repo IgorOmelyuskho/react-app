@@ -6,6 +6,8 @@ import ViewProjects from '../ViewProjects/index';
 import VendorProjects from '../VendorProjects/index';
 import VendorNewProject from '../VendorNewProject/index';
 import UpdateVendorProject from '../UpdateVendorProject/index';
+import VendorProfile from '../VendorProfile/index';
+
 
 class Vendor extends Component {
   constructor(props) {
@@ -22,6 +24,7 @@ class Vendor extends Component {
           <Route path="/vendor/project/:id" component={UpdateVendorProject} />
           <Route path="/vendor/main" component={VendorMain} />
           <Route path="/vendor/new-project" component={VendorNewProject} />
+          <Route path="/vendor/profile" component={VendorProfile} />
           <Route component={VendorMain} />
         </Switch>
       </div>

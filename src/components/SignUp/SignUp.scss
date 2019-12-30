@@ -1,0 +1,55 @@
+.SignUp {
+  .bg-color {
+    background-color: #e9ecef;
+  }
+
+  .text-center {
+    background-color: #e9ecef;
+  }
+
+  .select-role {
+    margin: 5px;
+  }
+
+  .selected {
+    border: 2px solid blue;
+  }
+
+  .social {
+    background: #f4f4f4;
+    margin-bottom: 40px;
+    height: 114px;
+
+    .text {
+      font-size: 13px;
+      padding-top: 14px;
+      padding-bottom: 17px;
+      line-height: 1.23;
+      letter-spacing: 0.4px;
+      text-align: center;
+      color: rgba(50, 50, 50, 0.75);
+    }
+
+    .social-buttons {
+      display: flex;
+      justify-content: center;
+
+      .social-signin-btn {
+        width: 47px;
+        height: 47px;
+        border-radius: 30px;
+        margin: 0px 4px;
+        cursor: pointer;
+
+        &:hover {
+          transform: scale(1.05);
+        }
+
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+  }
+}

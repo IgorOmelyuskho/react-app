@@ -3,7 +3,8 @@
     "main": "Main",
     "allProjects": "All projects",
     "myProjects": "My projects",
-    "signOut": "Sign out"
+    "signOut": "Sign out",
+    "profile": "Profile"
   },
   "VendorMainRight": {
     "chat": "Chat",

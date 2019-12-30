@@ -35,6 +35,9 @@ class VendorHeader extends Component {
         <Link className="nav-link" to="/vendor/projects">
           {translate(this.self, 'myProjects')}
         </Link>
+        <Link className="nav-link" to="/vendor/profile">
+          {translate(this.self, 'profile')}
+        </Link>
         <select defaultValue={TranslateService.lang === 'en' ? 'en' : 'ru'} className="language" onChange={this.setLanguage.bind(this)}>
           <option value="ru">Ru</option>
           <option value="en">En</option>

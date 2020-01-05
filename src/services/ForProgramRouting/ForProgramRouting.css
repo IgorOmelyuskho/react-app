@@ -1,6 +1,6 @@
 .fixed {
   position: fixed;
-  bottom: 10px;
+  bottom: -100px;
   opacity: 0;
 }
 

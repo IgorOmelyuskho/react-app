@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './SignUpInvestor.css';
 import MaskedInput from 'react-text-mask'
 import AuthService from '../../services/AuthService';
+import * as NotificationService from '../../services/NotificationService';
 
 const phoneMask = ['+', /\d/, /\d/, /\d/, ' ', /\d/, /\d/, ' ', /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/];
 const phonePattern = '\\\+\\d\{3\}\\s\\d\{2\}\\s\\d\{3\}\\s\\d\{4\}';
@@ -96,7 +97,15 @@ class SignUpInvestor extends Component {
   signUp = () => {
     console.log(this.validator.allValid());
     if (this.validator.allValid()) {
-      AuthService.signUpAsInvestor(this.state);
+      AuthService.signUpAsInvestor(this.state)
+      .then((response) => {
+        if (response.data == null || response.data.token == null) {
+          NotificationService.notify('Check you email');
+        }
+      })
+      .catch((error) => {
+        NotificationService.notify(error.response.data.error.errorMessage[0]);
+      });
     } else {
       this.validator.showMessages();
       this.forceUpdate();

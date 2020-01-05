@@ -1,4 +1,4 @@
-const domain = 'https://master.iiua.com.ua';
+const domain = 'http://localhost:3010';
 
 export const environment = {
   production: false,

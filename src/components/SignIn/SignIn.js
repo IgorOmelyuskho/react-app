@@ -145,6 +145,7 @@ class SignIn extends Component {
         AuthService.successSocialOrEmailLogin(response.data.token);
       })
       .catch((error) => {
+        console.log(error);
         NotificationService.notify(error.response.data.error.errorMessage[0]);
       });
   }

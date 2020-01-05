@@ -21,7 +21,8 @@ export default class AuthService {
       const decodedToken = jwtDecode(token);
       return decodedToken.role;
     } catch (e) {
-      alert('Some problem with token');
+      NotificationService.notify('Some problem with token')
+      // alert('Some problem with token');
     }
   }
 
@@ -34,7 +35,7 @@ export default class AuthService {
   }
 
   static signUpAsInvestor(investorDto) {
-    console.log(investorDto);
+    return axios.post(environment.auth + environment.investorRegister, investorDto);
   }
 
   static signIn(email, password) {
@@ -52,15 +53,15 @@ export default class AuthService {
     if (role === UserRole.Vendor) {
       this.fetchVendorSubscribe(profileService.fetchVendor());
     }
-    /*   if (role === UserRole.Investor) {
-        this.fetchInvestorSubscribe(this.profileService.fetchInvestor());
-      }
-      if (role === UserRole.Admin) {
-        this.fetchAdminSubscribe(this.profileService.fetchAdmin());
-      }
-      if (role === UserRole.ProjectUser) {
-        this.fetchProjectUserSubscribe(this.profileService.fetchProjectUser());
-      } */
+    if (role === UserRole.Investor) {
+      this.fetchInvestorSubscribe(profileService.fetchInvestor());
+    }
+    // if (role === UserRole.Admin) {
+    //   this.fetchAdminSubscribe(profileService.fetchAdmin());
+    // }
+    // if (role === UserRole.ProjectUser) {
+    //   this.fetchProjectUserSubscribe(profileService.fetchProjectUser());
+    // }
   }
 
   static fetchVendorSubscribe(promise) {
@@ -69,6 +70,20 @@ export default class AuthService {
         this.user$.next(response.data);
         // this.translate.getSphereActivityOption();
         Navigate.navigateByUrl('/vendor');
+      },
+      err => {
+        console.warn(err);
+        this.signOut();
+      }
+    );
+  }
+
+  static fetchInvestorSubscribe(promise) {
+    promise.then(
+      response => {
+        this.user$.next(response.data);
+        // this.translate.getSphereActivityOption();
+        Navigate.navigateByUrl('/investor');
       },
       err => {
         console.warn(err);

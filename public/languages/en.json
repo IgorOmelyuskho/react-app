@@ -17,5 +17,11 @@
     "password": "Password",
     "passwordPlaceholder": "Enter password",
     "signInBtn": "SIGN IN"
+  },
+  "InvestorHeader": {
+    "main": "Main",
+    "findProjects": "Find projects",
+    "signOut": "Sign out",
+    "profile": "Profile"
   }
 }

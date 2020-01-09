@@ -24,6 +24,7 @@ import rootReducer from '../src/store/reducers';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import Investor from './components/InvestorComponents/Investor';
 
 // export const store = createStore(rootReducer, applyMiddleware(thunk));
 
@@ -83,6 +84,7 @@ class App extends Component {
                 <Route path="/test_router_2" component={TestRouter_2} />
                 <Route path="/email-validate/:code" component={EmailValidate} />
                 <Route path="/vendor" render={() => <Vendor store={this.props.store} />} />
+                <Route path="/investor" render={() => <Investor store={this.props.store} />} />
                 <Route component={Index} /> {/* redirect */}
               </Switch>
             </div>

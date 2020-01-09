@@ -17,5 +17,11 @@
     "password": "Пароль",
     "passwordPlaceholder": "Введите пароль",
     "signInBtn": "ВОЙТИ"
+  },
+  "InvestorHeader": {
+    "main": "Главная",
+    "findProjects": "Найти проекты",
+    "signOut": "Выйти",
+    "profile": "Профиль"
   }
 }

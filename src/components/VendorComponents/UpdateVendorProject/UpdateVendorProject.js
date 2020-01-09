@@ -50,6 +50,7 @@ class UpdateVendorProject extends Component {
         for (let i = 0; i < projects.length; i++) {
           if (projects[i].id.toString() === this.projectId) {
             const project = projects[i];
+            console.log(project);
             this.setState({
               isLoaded: true,
               projectName: project.name,
@@ -62,6 +63,7 @@ class UpdateVendorProject extends Component {
             }, this.setFormValid)
             this.avataraImg.current.src = project.avatara.url;
             this.avataraData = project.avatara;
+            console.log(this.avataraImg.current.src);
             return;
           }
         }

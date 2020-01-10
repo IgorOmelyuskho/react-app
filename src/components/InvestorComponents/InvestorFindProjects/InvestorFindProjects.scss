@@ -1,3 +1,7 @@
 .InvestorFindProjects {
-  display: block;
+  .projects {
+    .filtered-project-wrapper {
+      margin: 10px 0;
+    }
+  }
 }

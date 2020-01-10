@@ -401,7 +401,9 @@ class VendorNewProject extends Component {
         ...this.state,
         images: [...this.state.images],
         name: this.state.projectName,
-        legalEntityName: this.state.companyName
+        legalEntityName: this.state.companyName,
+        companyAge: parseInt(this.state.companyAge, 10),
+        moneyRequired: parseInt(this.state.moneyRequired, 10)
       }
       const avatara = this.avataraData;
       avatara.isAvatara = true;

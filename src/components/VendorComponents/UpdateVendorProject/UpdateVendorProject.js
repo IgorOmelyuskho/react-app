@@ -109,7 +109,7 @@ class UpdateVendorProject extends Component {
       <input value={this.state.companyAge} onChange={this.handleUserInput} name="companyAge" className="company-age" placeholder="Company age" type="number" />
       {showCompanyAgeErr && <div className="error">{this.state.companyAgeError}</div>}
 
-      <input value={parseInt(this.state.moneyRequired, 10)} onChange={this.handleUserInput} name="moneyRequired" className="money-required" placeholder="MoneyRequired" type="number" />
+      <input value={this.state.moneyRequired} onChange={this.handleUserInput} name="moneyRequired" className="money-required" placeholder="MoneyRequired" type="number" />
       {showMoneyRequiredErr && <div className="error">{this.state.moneyRequiredError}</div>}
 
       <hr />
@@ -419,7 +419,9 @@ class UpdateVendorProject extends Component {
         ...this.state,
         images: [...this.state.images],
         name: this.state.projectName,
-        legalEntityName: this.state.companyName
+        legalEntityName: this.state.companyName,
+        companyAge: parseInt(this.state.companyAge, 10),
+        moneyRequired: parseInt(this.state.moneyRequired, 10)
       }
       const avatara = this.avataraData;
       avatara.isAvatara = true;

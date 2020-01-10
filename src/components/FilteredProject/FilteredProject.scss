@@ -1,0 +1,30 @@
+.FilteredProject {
+  border: 1px solid blue;
+
+  .avatara-wrapper {
+    .avatara {
+      height: 100px;
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+  }
+
+  .project-name,
+  .company-name,
+  .region,
+  .company-age,
+  .money-required,
+  .spheres-activity {
+    margin-top: 5px;
+    text-align: left;
+  }
+
+  .spheres-activity-item {
+    margin: 0;
+    margin-left: 10px;
+  }
+
+  .highlight {
+    background: rgb(200, 255, 0);
+  }
+}

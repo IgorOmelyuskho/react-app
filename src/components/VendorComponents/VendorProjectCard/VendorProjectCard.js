@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './VendorProjectCard.scss';
+import ProjectsService from '../../../services/ProjectsService';
 
 class VendorProjectCard extends Component {
   componentDidMount() {
@@ -8,6 +9,7 @@ class VendorProjectCard extends Component {
   render() {
     return (
       <div className="project" onClick={this.projectClick}>
+        <img onClick={this.removeProject} className="remove-btn" src="images/close-2.png" alt="" />
         <div className="avatara-wrapper">
           <div className="avatara" style={{ backgroundImage: this.getAvataraUrl(this.props.project) }}></div>
           <div className="rating">{this.props.project.rating}</div>
@@ -35,6 +37,14 @@ class VendorProjectCard extends Component {
         </div>
       </div>
     );
+  }
+
+  removeProject = (e) => {
+    e.stopPropagation();
+    ProjectsService.removeProjectById(this.props.project.id)
+      .then(res => {
+        this.props.onRemoveProject(this.props.project);
+      })
   }
 
   projectClick = () => {

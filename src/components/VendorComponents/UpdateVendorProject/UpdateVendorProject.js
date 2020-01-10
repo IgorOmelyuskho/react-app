@@ -4,6 +4,7 @@ import ProjectsService from '../../../services/ProjectsService';
 import { regions } from '../../../assets/regions';
 import FilesService from '../../../services/FileService';
 import FileUploader from '../../../components/FileUploader/index';
+import { spheresActivity } from '../../../assets/spheresActivity';
 
 class UpdateVendorProject extends Component {
   avataraImg;
@@ -28,8 +29,11 @@ class UpdateVendorProject extends Component {
       region: "",
       address: "",
       description: "",
+      companyAge: -1,
+      moneyRequired: -1,
       videos: [],
       images: [],
+      spheresActivity: [],
 
       avataraError: '',
       projectNameError: '',
@@ -38,7 +42,10 @@ class UpdateVendorProject extends Component {
       addressError: '',
       descriptionError: '',
       videosError: '',
-      imagesError: ''
+      imagesError: '',
+      moneyRequiredError: '',
+      companyAgeError: '',
+      sphereActivityError: ''
     };
   }
 
@@ -50,7 +57,6 @@ class UpdateVendorProject extends Component {
         for (let i = 0; i < projects.length; i++) {
           if (projects[i].id.toString() === this.projectId) {
             const project = projects[i];
-            console.log(project);
             this.setState({
               isLoaded: true,
               projectName: project.name,
@@ -60,10 +66,12 @@ class UpdateVendorProject extends Component {
               description: project.description,
               videos: project.videos,
               images: project.images,
+              companyAge: project.companyAge,
+              moneyRequired: project.moneyRequired,
+              spheresActivity: project.spheresActivity
             }, this.setFormValid)
             this.avataraImg.current.src = project.avatara.url;
             this.avataraData = project.avatara;
-            console.log(this.avataraImg.current.src);
             return;
           }
         }
@@ -79,6 +87,9 @@ class UpdateVendorProject extends Component {
     const showDescriptionErr = this.state.descriptionError !== '';
     const showVideosErr = this.state.videosError !== '';
     const showImagesErr = this.state.imagesError !== '';
+    const showCompanyAgeErr = this.state.companyAgeError !== '';
+    const showMoneyRequiredErr = this.state.moneyRequiredError !== '';
+    const showSphereActivityErr = this.state.sphereActivityError !== '';
 
     return <div className="UpdateVendorProject">
       <img ref={this.avataraImg} className="avatara" src={"/images/empty-profile.jpg"} alt="empty_image" />
@@ -92,6 +103,14 @@ class UpdateVendorProject extends Component {
 
       <input value={this.state.companyName} onChange={this.handleUserInput} name="companyName" className="company-name" placeholder="Company name" type="text" />
       {showCompanyNameErr && <div className="error">{this.state.companyNameError}</div>}
+
+      <hr />
+
+      <input value={this.state.companyAge} onChange={this.handleUserInput} name="companyAge" className="company-age" placeholder="Company age" type="number" />
+      {showCompanyAgeErr && <div className="error">{this.state.companyAgeError}</div>}
+
+      <input value={parseInt(this.state.moneyRequired, 10)} onChange={this.handleUserInput} name="moneyRequired" className="money-required" placeholder="MoneyRequired" type="number" />
+      {showMoneyRequiredErr && <div className="error">{this.state.moneyRequiredError}</div>}
 
       <hr />
 
@@ -123,6 +142,15 @@ class UpdateVendorProject extends Component {
           </div>
         )}
       </div>
+
+      <hr />
+
+      <select value={this.state.spheresActivity} onChange={this.changeSphereActivity} multiple>
+        {spheresActivity.map((sphereActivity, index) =>
+          <option key={index} value={sphereActivity.name}>{sphereActivity.name}</option>
+        )}
+      </select>
+      {showSphereActivityErr && <div className="error">{this.state.sphereActivityError}</div>}
 
       <hr />
 
@@ -204,6 +232,24 @@ class UpdateVendorProject extends Component {
     this.setState({ videosError: videosErr }, this.setFormValid);
   }
 
+  changeSphereActivity = (e) => {
+    const resArr = [];
+    for (let i = 0; i < e.target.selectedOptions.length; i++) {
+      resArr.push(e.target.selectedOptions[i].value)
+    }
+    this.setState({ spheresActivity: resArr }, this.validateSphereActivity)
+  }
+
+  validateSphereActivity = () => {
+    let sphereActivityErr = this.state.sphereActivityErr;
+    if (this.state.spheresActivity.length > 0) {
+      sphereActivityErr = '';
+    } else {
+      sphereActivityErr = 'Sphere of activity is required';
+    }
+    this.setState({ sphereActivityError: sphereActivityErr }, this.setFormValid);
+  }
+
   handleUserInput = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -216,6 +262,8 @@ class UpdateVendorProject extends Component {
     let addressErr = this.state.addressError;
     let descriptionErr = this.state.descriptionError;
     let regionErr = this.state.regionError;
+    let companyAgeErr = this.state.companyAgeError;
+    let moneyRequiredErr = this.state.moneyRequiredError;
 
     switch (fieldName) {
       case 'projectName':
@@ -261,6 +309,20 @@ class UpdateVendorProject extends Component {
           regionErr = '';
         }
         break;
+      case 'companyAge':
+        if (value === "") {
+          companyAgeErr = 'Company age is required';
+        } else {
+          companyAgeErr = '';
+        }
+        break;
+      case 'moneyRequired':
+        if (value === "") {
+          moneyRequiredErr = 'Money required is required';
+        } else {
+          moneyRequiredErr = '';
+        }
+        break;
       default:
         break;
     }
@@ -270,7 +332,9 @@ class UpdateVendorProject extends Component {
       companyNameError: companyNameErr,
       addressError: addressErr,
       descriptionError: descriptionErr,
-      regionError: regionErr
+      regionError: regionErr,
+      companyAgeError: companyAgeErr,
+      moneyRequiredError: moneyRequiredErr
     }, this.setFormValid);
   }
 
@@ -284,7 +348,10 @@ class UpdateVendorProject extends Component {
       this.state.companyNameError.length === 0 &&
       this.state.addressError.length === 0 &&
       this.state.descriptionError.length === 0 &&
-      this.state.regionError.length === 0
+      this.state.regionError.length === 0 &&
+      this.state.companyAgeError.length === 0 &&
+      this.state.moneyRequiredError.length === 0 &&
+      this.state.sphereActivityError.length === 0
     ) {
       formValid = true;
     }

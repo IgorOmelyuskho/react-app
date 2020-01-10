@@ -171,6 +171,22 @@ export default class AuthService {
     }
 
     if (role === UserRole.Investor) {
+      profileService.fetchInvestor()
+      .then(
+        response => {
+          this.user$.next(response.data);
+          // this.translate.getSphereActivityOption();
+          if (pathName === '' || pathName === '/') {
+            Navigate.navigateByUrl('investor'); /* history.push('investor') - not work */
+          } else {
+            Navigate.navigateByUrl(pathName); /* history.push(pathName) - not work */
+          }
+        },
+        err => {
+          console.warn(err);
+          this.signOut();
+        }
+      );
     }
 
     if (role === UserRole.Admin) {

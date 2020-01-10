@@ -41,4 +41,12 @@ export default class ProjectsService {
   static updateVendorProject(projectId, updatedVendorProject) {
     return axios.put(environment.projects + environment.vendorProject + projectId, updatedVendorProject);
   }
+
+  static async removeProjectById(projectId) {
+    return axios.delete(environment.projects + environment.vendorProject + projectId);
+  }
+
+  static async filteringProjects(filter) {
+    return axios.post(environment.projects + environment.filteringProjects, filter);
+  }
 }

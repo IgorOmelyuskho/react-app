@@ -36,6 +36,23 @@
     }
   }
 
+  .spheres-of-activity {
+    .sphere-activity {
+      display: flex;
+      justify-content: center;
+
+      .text {
+        line-height: 1em;
+        margin-right: 5px;
+      }
+
+      img {
+        height: 1em;
+        cursor: pointer;
+      }
+    }
+  }
+
   .photos {
     width: 90%;
     margin: auto;

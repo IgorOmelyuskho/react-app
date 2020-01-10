@@ -37,7 +37,7 @@ class VendorProjects extends Component {
       <div className="for-scroll">
         {this.state.projects.map(project =>
           <div key={project.id} className="project-wrapper">
-            <VendorProjectCard project={project} onProjectClick={this.onProjectClick}></VendorProjectCard>
+            <VendorProjectCard project={project} onProjectClick={this.onProjectClick} onRemoveProject={this.onRemoveProject}></VendorProjectCard>
           </div>
         )}
       </div>
@@ -46,6 +46,12 @@ class VendorProjects extends Component {
 
   onProjectClick = (project) => {
     Navigate.navigateByUrl('/vendor/project/' + project.id)
+  }
+
+  onRemoveProject = (project) => {
+    this.setState({
+      projects: this.state.projects.filter(proj => proj !== project)
+    })
   }
 }
 

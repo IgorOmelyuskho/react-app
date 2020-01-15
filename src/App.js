@@ -16,7 +16,7 @@ import ForProgramRouting from './services/ForProgramRouting/ForProgramRouting';
 import SharedHeader from './components/SharedHeader/index';
 
 import AuthService from './services/AuthService';
-import { useInterceptor } from './services/AddTokenInterceptor';
+import { useAddTokenInterceptor } from './services/AddTokenInterceptor';
 import { TranslateService } from './services/TranslateService';
 
 import { createStore, applyMiddleware } from 'redux';
@@ -25,6 +25,7 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import Investor from './components/InvestorComponents/Investor';
+import { useUnauthorizedInterceptor } from './services/UnauthorizedInterceptor';
 
 // export const store = createStore(rootReducer, applyMiddleware(thunk));
 
@@ -47,7 +48,8 @@ export const ThemeContext = React.createContext(themes.light);
 class App extends Component {
   constructor(props) {
     super(props);
-    useInterceptor();
+    useUnauthorizedInterceptor();
+    useAddTokenInterceptor();
     AuthService.init();
     TranslateService.changeLanguageEvent$.subscribe(
       val => { this.forceUpdate() }
